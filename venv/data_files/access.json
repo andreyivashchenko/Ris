@@ -1,0 +1,14 @@
+{
+  "manager": [
+    "bp_report",
+    "bp_query",
+    "bp_auth.int_user"
+  ],
+  "administrator": [
+    "bp_report",
+    "bp_auth.int_user"
+  ],
+  "provider": [
+
+  ]
+}

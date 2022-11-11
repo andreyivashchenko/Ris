@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link type="text/css" href="{{ url_for('static', filename='queries/style.css') }}" rel="stylesheet" />
+    <title>Queries_Title</title>
+</head>
+    <body>
+        <div class="wrapper">
+            <div class="form">
+                <p class="form_title">Выберите необходимый запрос</p>
+                <a href="{{url_for('bp_query.query_1')}}" >1. Поиск сведений о клиентах по дате рождения</a>
+                <a href="{{url_for('bp_query.query_2')}}" >2. Показать информацию о подключенных услугах у конкретного клиента</a>
+                <a href="{{url_for('bp_query.query_3')}}" >3. Просмотр количества подключений у выбранной услуги</a>
+                <a href="{{url_for('bp_query.query_4')}}" >4. Определить максимальную цену для услуг, уникальный код которых начинается с ХХХ</a>
+                <a href="{{url_for('bp_query.query_5')}}" >5. Просмотр количества изменений баланса клиентов в выбранный месяц</a>
+            </div>
+        </div>
+    </body>
+</html>

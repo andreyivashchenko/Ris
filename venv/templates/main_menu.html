@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Start page</title>
+    <link type="text/css" href="{{ url_for('static', filename='main/main_menu.css') }}" rel="stylesheet" />
+</head>
+    <body>
+        <div class="wrapper">
+            <div class="container">
+                <h1 class="title">Bauman Connection</h1>
+
+                    {% if User == 'manager' %}
+                    <span>Вы авторизованы как: {{ User }} </span>
+                    {% elif User == 'administrator' %}
+                    <span>Вы авторизованы как:  {{ User }}  </span>
+                    {% elif User %}
+                    <span>Вы авторизованы как:  {{ User }} </span>
+                    {% else %}
+                    <a href="{{ url_for('bp_auth.start_auth')}}">Sign in</a>
+                    {% endif %}
+
+                {% if User == 'client' %}
+                <a href="{{ url_for('bp_auth.ext_user') }}">Меню клиента </a>
+                <a href="{{ url_for('bp_auth.exit') }}">Выход из акаунта</a>
+                {% elif not User %}
+                <span>Для дальнейшей работы вам необходимо авторизоваться</span>
+                {% else %}
+                <a href="{{ url_for('bp_auth.int_user') }}">Меню сотрудника </a>
+                <a href="{{ url_for('bp_auth.exit') }}">Выход из акаунта</a>
+                {% endif %}
+
+            </div>
+        </div>
+    </body>
+</html>

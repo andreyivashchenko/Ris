@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link type="text/css" href="{{ url_for('static', filename='auth/auth.css') }}" rel="stylesheet" />
+    <title>Auth</title>
+</head>
+<style>
+
+</style>
+    <body>
+        <div class="wrapper">
+            <form class="form" method="post">
+                <h1 class="title">Страница авторизации</h1>
+                <input type="text" class="form_input" placeholder="Логин" name="login">
+                <input type="password" class="form_input" placeholder="Пароль" name="password">
+                <p>{{ message }}</p>
+                <button type="submit" class="form_button">Войти</button>
+            </form>
+        </div>
+    </body>
+</html>
