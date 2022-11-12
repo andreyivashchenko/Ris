@@ -47,3 +47,10 @@ def call_proc(dbconfig: dict, proc_name: str, *args):
             result.append(dict(zip(schema, row)))
 
         return result
+
+def insert(dbconfig: dict, _sql:str):
+    with DBConnection(dbconfig) as cursor:
+        if cursor is None:
+            raise ValueError('Курсор не создан')
+        result = cursor.execute(_sql)
+        return result
