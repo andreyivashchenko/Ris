@@ -2,14 +2,33 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>меню отчетов</title>
+    <title>Title</title>
+    <style type="text/css">
+        .named_list{
+            font-size: 12pt;
+            color: green;
+            display: inline-block;
+            width: 500px;
+            text-align: left;
+           }
+
+    </style>
 </head>
 <body>
-  <center>
-    <h2>Меню отчетовС</h2> <br>
-    <a href="{{url_for('bp_report.report_page1')}}">Отчёт 1</a> <br>
-    <a href="{{url_for('bp_report.report_page2')}}">Отчёт 2</a> <br>
-    <a href="{{url_for('bp_report.start_report')}}">Выход</a> <br>
-  </center>
+    <h2 align="center">reports menu</h2>
+    <center>
+        {% for report in report_list %}
+        <form action='' method = 'POST'>
+            <label for="create_rep" class="named_list">{{report['rep_name']}}</label>
+            <input type="submit" name="create_rep" id="create_rep" value="create">
+            <input type="submit" name="view_rep" id="view_rep" value="view">
+            <input type="hidden" name="rep_id" value="{{report['rep_id']}}">
+        </form>
+        {% endfor %}
+    </center>
+
 </body>
 </html>
+
+<!--Лэйбл нужен только для первой кнопки. Позволяет пристроить поясняющий тест перед кнопкой ввода-->
+<!--Айди - это параметр который связывает поле ввода с тэгом лэйбл.-->

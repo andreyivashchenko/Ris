@@ -39,14 +39,14 @@ def call_proc(dbconfig: dict, proc_name: str, *args):
     with DBConnection(dbconfig) as cursor:
         if cursor is None:
             raise ValueError('Курсор не создан')
+        param_list = []
+        for arg in args:
+            print('arg=', arg)
+            param_list.append(arg)
 
-        cursor.execute(_sql)
-        result = []
-        schema = [column[0] for column in cursor.description]
-        for row in cursor.fetchall():
-            result.append(dict(zip(schema, row)))
-
-        return result
+        print('param_list=', param_list)
+        res = cursor.callproc(proc_name, param_list)
+    return res
 
 def insert(dbconfig: dict, _sql:str):
     with DBConnection(dbconfig) as cursor:
