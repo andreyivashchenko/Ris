@@ -2,7 +2,7 @@
 
 {% block external_user %}
 
-    <a href="#">В каталог</a>
+    <a href="{{ url_for('bp_order.order_index') }}">В каталог</a>
     <a href="{{ url_for('menu_choice') }}"> Выход на главное меню</a>
 
 {% endblock %}

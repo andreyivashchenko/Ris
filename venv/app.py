@@ -2,6 +2,7 @@ from flask import Blueprint, Flask, request, render_template, json, redirect, se
 from blueprint_query.route import blueprint_query
 from blueprint_report.route import blueprint_report
 from blueprint_auth.route import blueprint_auth
+from basket.route import blueprint_order
 
 
 app = Flask(__name__)
@@ -10,13 +11,16 @@ app.secret_key = 'SuperKey'
 app.register_blueprint(blueprint_auth, url_prefix='/auth')
 app.register_blueprint(blueprint_query, url_prefix='/queries')
 app.register_blueprint(blueprint_report, url_prefix='/reports')
-
+app.register_blueprint(blueprint_order, url_prefix='/orders')
 
 app.config['dbconfig'] = json.load(open('data_files/dbconfig.json'))
 
 with open('data_files/access.json', 'r') as f:
     access_config = json.load(f)
     app.config['access_config'] = access_config
+
+app.config['cache_config'] = json.load(open('data_files/cache.json'))
+
 
 @app.route('/')
 def menu_choice():

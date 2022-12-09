@@ -3,12 +3,11 @@ from db_work import select, call_proc
 from access import login_required, group_required
 from sql_provider import SQLProvider
 import os
-from db_context_manager import DBConnection
 
 blueprint_report = Blueprint('bp_report', __name__, template_folder='templates')
 provider = SQLProvider(os.path.join(os.path.dirname(__file__), 'sql'))
 
-reports = json.load(open('../data_files/reports.json'))
+# reports = json.load(open('../data_files/reports.json'))
 
 report_list = [
     {'rep_name':'report1 ', 'rep_id':'1'},
@@ -70,6 +69,7 @@ def view_rep1():
     else:
         interval = request.form.get('input_year')
         year, month = interval.split('-')
+        print("год ", year, "месяц ", month)
         if year and month:
             _sql = provider.get('rep1.sql', year=year, month=month)
             report_result, schema = select(current_app.config['dbconfig'], _sql)

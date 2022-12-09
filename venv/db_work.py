@@ -16,7 +16,9 @@ def select(db_config: dict, sql: str) -> Tuple[Tuple, List[str]]:
     with DBConnection(db_config) as cursor:
         if cursor is None:
             raise ValueError('Cursor not found')
+        print(sql)
         cursor.execute(sql)
+
         schema = [column[0] for column in cursor.description]
         result = cursor.fetchall()
     return result, schema
