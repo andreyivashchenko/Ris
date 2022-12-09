@@ -171,6 +171,89 @@ INSERT INTO `internal_user` VALUES (1,'administrator','admin','1234'),(2,'manage
 UNLOCK TABLES;
 
 --
+-- Table structure for table `orders_list`
+--
+
+DROP TABLE IF EXISTS `orders_list`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `orders_list` (
+  `list_id` int NOT NULL AUTO_INCREMENT,
+  `order_id` int DEFAULT NULL,
+  `prod_id` int DEFAULT NULL,
+  `prod_amount` int DEFAULT NULL,
+  PRIMARY KEY (`list_id`),
+  KEY `order_id_idx` (`order_id`),
+  KEY `prod_id_idx` (`prod_id`),
+  CONSTRAINT `order_id` FOREIGN KEY (`order_id`) REFERENCES `user_orders` (`order_id`),
+  CONSTRAINT `prod_id` FOREIGN KEY (`prod_id`) REFERENCES `product` (`prod_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `orders_list`
+--
+
+LOCK TABLES `orders_list` WRITE;
+/*!40000 ALTER TABLE `orders_list` DISABLE KEYS */;
+INSERT INTO `orders_list` VALUES (1,1,1,1),(2,2,1,1),(3,2,2,1),(4,2,3,1),(5,2,4,2),(6,3,2,6),(7,4,2,1),(8,4,3,2),(9,5,1,22);
+/*!40000 ALTER TABLE `orders_list` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `product`
+--
+
+DROP TABLE IF EXISTS `product`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `product` (
+  `prod_id` int NOT NULL AUTO_INCREMENT,
+  `prod_name` varchar(45) DEFAULT NULL,
+  `prod_price` int DEFAULT NULL,
+  PRIMARY KEY (`prod_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `product`
+--
+
+LOCK TABLES `product` WRITE;
+/*!40000 ALTER TABLE `product` DISABLE KEYS */;
+INSERT INTO `product` VALUES (1,'Хлеб',50),(2,'Молоко',57),(3,'Сыр',110),(4,'Сметана',90);
+/*!40000 ALTER TABLE `product` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `report_1`
+--
+
+DROP TABLE IF EXISTS `report_1`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `report_1` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name_service` varchar(45) DEFAULT NULL,
+  `profit` int DEFAULT NULL,
+  `sum_cli` int DEFAULT NULL,
+  `year` int DEFAULT NULL,
+  `month` int DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `report_1`
+--
+
+LOCK TABLES `report_1` WRITE;
+/*!40000 ALTER TABLE `report_1` DISABLE KEYS */;
+INSERT INTO `report_1` VALUES (18,'for_family',200,2,2020,2),(19,'it_for_200',200,1,2020,2);
+/*!40000 ALTER TABLE `report_1` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Temporary view structure for view `request_6`
 --
 
@@ -242,7 +325,7 @@ CREATE TABLE `service_status` (
 
 LOCK TABLES `service_status` WRITE;
 /*!40000 ALTER TABLE `service_status` DISABLE KEYS */;
-INSERT INTO `service_status` VALUES (1,'2020-02-15',NULL,1,1),(2,'2020-02-14',NULL,1,2),(3,'2020-03-17',NULL,1,3),(4,'2020-06-17',NULL,2,1);
+INSERT INTO `service_status` VALUES (1,'2020-02-01',NULL,1,1),(2,'2020-02-14','2020-03-11',1,2),(3,'2020-03-17',NULL,1,3),(4,'2020-01-17',NULL,2,1);
 /*!40000 ALTER TABLE `service_status` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -274,13 +357,38 @@ INSERT INTO `services` VALUES (1,'for_family',100,'2020-03-30',1),(2,'it_for_200
 UNLOCK TABLES;
 
 --
+-- Table structure for table `user_orders`
+--
+
+DROP TABLE IF EXISTS `user_orders`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `user_orders` (
+  `order_id` int NOT NULL AUTO_INCREMENT,
+  `user_id` int DEFAULT NULL,
+  `order_date` date DEFAULT NULL,
+  PRIMARY KEY (`order_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `user_orders`
+--
+
+LOCK TABLES `user_orders` WRITE;
+/*!40000 ALTER TABLE `user_orders` DISABLE KEYS */;
+INSERT INTO `user_orders` VALUES (1,1,'2022-12-08'),(2,1,'2022-12-08'),(3,1,'2022-12-08'),(4,1,'2022-12-08'),(5,1,'2022-12-08');
+/*!40000 ALTER TABLE `user_orders` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Dumping events for database 'provaider'
 --
 
 --
 -- Dumping routines for database 'provaider'
 --
-/*!50003 DROP PROCEDURE IF EXISTS `new_procedure` */;
+/*!50003 DROP PROCEDURE IF EXISTS `report_1` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
@@ -290,30 +398,28 @@ UNLOCK TABLES;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `new_procedure`(in date_a DATE)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `report_1`(in _year int, in _month int)
 BEGIN
-	declare done int default 0;
-    declare id_client int;
-    declare balance_cl int;
-    declare sum int;
-    declare C1 cursor for 
-		select  sum(ser.price_ser) as SUM, cl.id_cl, cl.balance from service_status ss 
-		join services ser on ser.id_ser = ss.id_service
-		join client cl on ss.id_client = cl.id_cl
-		where id_client is not null and (date_of_disconnection is null or date_of_disconnection like '0000-00-00') and date_of_activation < '2020-07-20' -- сравнение с переменной
-		group by id_client;
-        declare exit handler for sqlstate '02000'
-			set done = 1;
-		open C1;
-      --  while done = 0 do
-			fetch C1 into sum, id_client, balance_cl;
-			select sum, id_client, balance_cl;
-          -- update client set balance_cl = 1000
-           -- where (id_cl = id_client);
-            -- insert into balance_history (balance_change_date, changing_the_balance, id_client)
-           -- values (current_date, -balance_cl, id_cl);
-		-- end while;
-        close C1;
+DECLARE done INT DEFAULT 0;
+	DECLARE service_name varchar(45);
+	DECLARE profit int;
+    DECLARE sum_cli int;
+	DECLARE C1 CURSOR FOR
+		select ser.name_ser, sum(ser.price_ser), count(ss.id_client ) from services as ser
+		join (select * from service_status) as ss
+		on ser.id_ser = ss.id_service
+		where (month(ss.date_of_activation) <= _month and year(ss.date_of_activation) <= _year) and ((ss.date_of_disconnection is NULL) 
+		or (month(ss.date_of_disconnection) >= _month and year(ss.date_of_disconnection) >= _year))
+		group by ser.name_ser;
+	DECLARE EXIT HANDLER FOR SQLSTATE '02000'
+		SET done = 1;
+	OPEN C1;
+	WHILE done = 0 DO
+		FETCH C1 INTO service_name, profit, sum_cli;
+	INSERT INTO report_1 (name_service, profit, sum_cli, year, month)
+	VALUES (service_name, profit, sum_cli, _year, _month);
+	END WHILE;
+    CLOSE C1;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -348,4 +454,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-11-10 23:21:26
+-- Dump completed on 2022-12-09 21:11:50
