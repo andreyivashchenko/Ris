@@ -1,0 +1,15 @@
+{
+  "reports_list": {
+    "report_1": {
+      "name": '',
+      "sql_view": ''
+
+    },
+    "report_2": {
+
+    }
+  },
+  "repots_url": {
+    "create_rep": create
+  }
+}

@@ -1,1 +1,2 @@
-select name_service, profit, sum_cli, date_rep from report_1 where date_rep like '$in_year-%'
+select name_service, profit, sum_cli, year, month from report_1
+where year = '$year' and month = '$month'

@@ -8,7 +8,7 @@ from db_context_manager import DBConnection
 blueprint_report = Blueprint('bp_report', __name__, template_folder='templates')
 provider = SQLProvider(os.path.join(os.path.dirname(__file__), 'sql'))
 
-
+reports = json.load(open('../data_files/reports.json'))
 
 report_list = [
     {'rep_name':'report1 ', 'rep_id':'1'},
@@ -35,7 +35,7 @@ def start_report():
             url_rep = report_url[rep_id]['view_rep']
         print('url_rep = ', url_rep)
         return redirect(url_for(url_rep))
-    # из формы получает номер отчета и какую кнопку
+    # из формы получает номер отчета и какую кнопку нажали
 
 @blueprint_report.route('/create_rep1', methods=['GET', 'POST'])
 @group_required
@@ -46,12 +46,18 @@ def create_rep1():
     else:
         print(current_app.config['dbconfig'])
         print("POST_create")
-        rep_year = request.form.get('input_year')
+        interval = request.form.get('input_year')
+        year, month = interval.split('-')
         print("Loading...")
-        if rep_year:
-            res = call_proc(current_app.config['dbconfig'], 'report_1', rep_year)
-            print('res=', res)
-            return render_template('report_created.html')
+        if year and month:
+            _sql = provider.get('rep1.sql', year=year, month=month)
+            report_result, schema = select(current_app.config['dbconfig'], _sql)
+            if report_result:
+                return "Данный очтет уже создан"
+            else:
+                res = call_proc(current_app.config['dbconfig'], 'report_1', year, month)
+                print('res=', res)
+                return render_template('report_created.html')
         else:
             return "Repeat input"
 
@@ -62,11 +68,14 @@ def view_rep1():
     if request.method == 'GET':
         return render_template('view_rep.html')
     else:
-        rep_year = request.form.get('input_year')
-        print(rep_year)
-        if rep_year:
-            _sql = provider.get('rep1.sql', in_year=rep_year)
-            product_result, schema = select(current_app.config['dbconfig'], _sql)
-            return render_template('result_rep1.html', schema = schema, result = product_result)
+        interval = request.form.get('input_year')
+        year, month = interval.split('-')
+        if year and month:
+            _sql = provider.get('rep1.sql', year=year, month=month)
+            report_result, schema = select(current_app.config['dbconfig'], _sql)
+            if report_result:
+                return render_template('result_rep1.html', schema = schema, result = report_result)
+            else:
+                return "Отчет за этот месяц не создан"
         else:
             return "Repeat input"
