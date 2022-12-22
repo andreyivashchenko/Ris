@@ -13,14 +13,19 @@ app.register_blueprint(blueprint_query, url_prefix='/queries')
 app.register_blueprint(blueprint_report, url_prefix='/reports')
 app.register_blueprint(blueprint_order, url_prefix='/orders')
 
-app.config['dbconfig'] = json.load(open('data_files/dbconfig.json'))
+
+
+with open('data_files/dbconfig.json', 'r') as f:
+    dbconfig = json.load(f)
+    app.config['dbconfig'] = dbconfig
 
 with open('data_files/access.json', 'r') as f:
     access_config = json.load(f)
     app.config['access_config'] = access_config
 
-app.config['cache_config'] = json.load(open('data_files/cache.json'))
-
+with open('data_files/cache.json', 'r') as f:
+    cache_config = json.load(f)
+    app.config['cache_config'] = cache_config
 
 @app.route('/')
 def menu_choice():

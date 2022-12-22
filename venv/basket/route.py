@@ -17,31 +17,31 @@ def order_index():
     if request.method == 'GET':
         sql = provider.get('all_items.sql')
         items = cached_select(db_config, sql)
+        print('items = ', items)
         basket_items = session.get('basket', {})
         return render_template('basket_order_list.html', items=items, basket=basket_items)
     else:
-        prod_id = request.form['prod_id']
-        count = request.form['count']
+        id_ser = request.form['id_ser']
         sql = provider.get('all_items.sql')
         items = select_dict(db_config, sql)
-        add_to_basket(prod_id, items, count)
+        add_to_basket(id_ser, items)
 
         return redirect(url_for('bp_order.order_index'))
 
 
-def add_to_basket(prod_id: str, items: dict, count: int):
-    item_description = [item for item in items if str(item['prod_id']) == str(prod_id)]
+def add_to_basket(id_ser: str, items: dict):
+    item_description = [item for item in items if str(item['id_ser']) == str(id_ser)]
     print('item_description before=', item_description)
     item_description = item_description[0]
     curr_basket = session.get('basket', {})
 
-    if prod_id in curr_basket:
-        curr_basket[prod_id]['amount'] = int (curr_basket[prod_id]['amount']) + int (count)
+    if id_ser in curr_basket:
+        print(id_ser)
+        return 'данная услуга уже добавлена'
     else:
-        curr_basket[prod_id] = {
-            'prod_name': item_description['prod_name'],
-            'prod_price': item_description['prod_price'],
-            'amount': count
+        curr_basket[id_ser] = {
+            'name_ser': item_description['name_ser'],
+            'price_ser': item_description['price_ser'],
         }
         session['basket'] = curr_basket
         session.permanent = True

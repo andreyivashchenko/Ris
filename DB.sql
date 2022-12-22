@@ -240,7 +240,7 @@ CREATE TABLE `report_1` (
   `year` int DEFAULT NULL,
   `month` int DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -249,7 +249,7 @@ CREATE TABLE `report_1` (
 
 LOCK TABLES `report_1` WRITE;
 /*!40000 ALTER TABLE `report_1` DISABLE KEYS */;
-INSERT INTO `report_1` VALUES (18,'for_family',200,2,2020,2),(19,'it_for_200',200,1,2020,2);
+INSERT INTO `report_1` VALUES (25,'it_for_200',200,1,2021,1);
 /*!40000 ALTER TABLE `report_1` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -325,7 +325,7 @@ CREATE TABLE `service_status` (
 
 LOCK TABLES `service_status` WRITE;
 /*!40000 ALTER TABLE `service_status` DISABLE KEYS */;
-INSERT INTO `service_status` VALUES (1,'2020-02-01',NULL,1,1),(2,'2020-02-14','2020-03-11',1,2),(3,'2020-03-17',NULL,1,3),(4,'2020-01-17',NULL,2,1);
+INSERT INTO `service_status` VALUES (1,'2020-02-01',NULL,1,1),(2,'2020-02-14','2020-03-11',1,2),(3,'2020-03-17',NULL,1,3);
 /*!40000 ALTER TABLE `service_status` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -352,7 +352,7 @@ CREATE TABLE `services` (
 
 LOCK TABLES `services` WRITE;
 /*!40000 ALTER TABLE `services` DISABLE KEYS */;
-INSERT INTO `services` VALUES (1,'for_family',100,'2020-03-30',1),(2,'it_for_200',200,'2020-05-11',2);
+INSERT INTO `services` VALUES (1,'for_family',100,'2020-03-30',1),(2,'it_for_200',200,'2020-05-11',2),(3,'it_for_500',500,'2021-03-22',NULL);
 /*!40000 ALTER TABLE `services` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -454,4 +454,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-12-09 21:11:50
+-- Dump completed on 2022-12-22 14:11:40

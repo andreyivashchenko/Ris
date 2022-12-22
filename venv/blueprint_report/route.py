@@ -43,11 +43,8 @@ def create_rep1():
         print("GET_create")
         return render_template('report_create.html')
     else:
-        print(current_app.config['dbconfig'])
-        print("POST_create")
         interval = request.form.get('input_year')
         year, month = interval.split('-')
-        print("Loading...")
         if year and month:
             _sql = provider.get('rep1.sql', year=year, month=month)
             report_result, schema = select(current_app.config['dbconfig'], _sql)

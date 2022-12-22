@@ -2,9 +2,9 @@
 <div style="border-style: solid, border-color: black; margin: 5px">
     <p>
         <span style="color: black">Название: </span>
-        <span style="color: green">{{ item['prod_name']}} </span>
+        <span style="color: green">{{ item['name_ser']}} </span>
         <span style="color: black">Цена: </span>
-        <span style="color: green">{{ item['prod_price']}} </span>
+        <span style="color: green">{{ item['price_ser']}} </span>
         {%if show_amount %}
         <span style="color: black">Количество: </span>
         <span style="color: green">{{ item['amount']}} </span>
@@ -15,8 +15,7 @@
     {%if show_form %}
     <div>
         <form action="" method="post">
-            <input type="hidden" name="prod_id" value="{{ item['prod_id'] }}">
-            <input style="width: 200px; padding-right: 10px" type="number" min="1" max="100" step="1" required name="count" placeholder="введите количество...">
+            <input type="hidden" name="id_ser" value="{{ item['id_ser'] }}">
             <input type="submit" name="action" value="Добавить">
         </form>
     </div>
