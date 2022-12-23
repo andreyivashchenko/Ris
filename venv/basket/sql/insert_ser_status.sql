@@ -1,0 +1,1 @@
+ insert service_status values (NULL, '$date', NULL, '$id_ser', '$user_id')

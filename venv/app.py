@@ -13,8 +13,6 @@ app.register_blueprint(blueprint_query, url_prefix='/queries')
 app.register_blueprint(blueprint_report, url_prefix='/reports')
 app.register_blueprint(blueprint_order, url_prefix='/orders')
 
-
-
 with open('data_files/dbconfig.json', 'r') as f:
     dbconfig = json.load(f)
     app.config['dbconfig'] = dbconfig
@@ -38,7 +36,6 @@ def menu_choice():
             return render_template('main_menu.html', User=User)
     else:
         return render_template('main_menu.html')
-
 
 def add_blueprint_access_handler(app:Flask, blueprint_names: list[str], handler: callable) -> Flask:
     for view_func_name, view_func in app.view_functions.items(): #цикл по всем достпуным обработчикам
