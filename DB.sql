@@ -181,13 +181,12 @@ CREATE TABLE `orders_list` (
   `list_id` int NOT NULL AUTO_INCREMENT,
   `order_id` int DEFAULT NULL,
   `prod_id` int DEFAULT NULL,
-  `prod_amount` int DEFAULT NULL,
   PRIMARY KEY (`list_id`),
   KEY `order_id_idx` (`order_id`),
   KEY `prod_id_idx` (`prod_id`),
   CONSTRAINT `order_id` FOREIGN KEY (`order_id`) REFERENCES `user_orders` (`order_id`),
   CONSTRAINT `prod_id` FOREIGN KEY (`prod_id`) REFERENCES `product` (`prod_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -196,7 +195,7 @@ CREATE TABLE `orders_list` (
 
 LOCK TABLES `orders_list` WRITE;
 /*!40000 ALTER TABLE `orders_list` DISABLE KEYS */;
-INSERT INTO `orders_list` VALUES (1,1,1,1),(2,2,1,1),(3,2,2,1),(4,2,3,1),(5,2,4,2),(6,3,2,6),(7,4,2,1),(8,4,3,2),(9,5,1,22);
+INSERT INTO `orders_list` VALUES (1,1,1),(2,2,1),(3,2,2),(4,2,3),(5,2,4),(6,3,2),(7,4,2),(8,4,3),(9,5,1),(10,14,2),(11,15,2),(12,16,2),(13,16,3),(14,18,2),(15,19,2),(16,20,3),(17,21,2),(18,22,2),(19,23,3),(20,24,2),(21,25,3),(22,26,2),(23,27,3),(24,28,2),(25,29,3);
 /*!40000 ALTER TABLE `orders_list` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -316,7 +315,7 @@ CREATE TABLE `service_status` (
   KEY `id_client_2` (`id_client`),
   CONSTRAINT `id_client_1` FOREIGN KEY (`id_client`) REFERENCES `client` (`id_cl`),
   CONSTRAINT `id_service` FOREIGN KEY (`id_service`) REFERENCES `services` (`id_ser`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -368,7 +367,7 @@ CREATE TABLE `user_orders` (
   `user_id` int DEFAULT NULL,
   `order_date` date DEFAULT NULL,
   PRIMARY KEY (`order_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -377,7 +376,7 @@ CREATE TABLE `user_orders` (
 
 LOCK TABLES `user_orders` WRITE;
 /*!40000 ALTER TABLE `user_orders` DISABLE KEYS */;
-INSERT INTO `user_orders` VALUES (1,1,'2022-12-08'),(2,1,'2022-12-08'),(3,1,'2022-12-08'),(4,1,'2022-12-08'),(5,1,'2022-12-08');
+INSERT INTO `user_orders` VALUES (1,1,'2022-12-08'),(2,1,'2022-12-08'),(3,1,'2022-12-08'),(4,1,'2022-12-08'),(5,1,'2022-12-08'),(11,1,'2022-12-08'),(14,1,'2022-12-08'),(15,1,'2022-12-08'),(16,1,'2022-12-08'),(18,1,'2022-12-08'),(19,1,'2022-12-08'),(20,1,'2022-12-08'),(21,1,'2022-12-08'),(22,1,'2022-12-08'),(23,1,'2022-12-08'),(24,1,'2022-12-08'),(25,1,'2022-12-08'),(26,1,'2022-12-08'),(27,1,'2022-12-08'),(28,1,'2022-12-08'),(29,1,'2022-12-08');
 /*!40000 ALTER TABLE `user_orders` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -454,4 +453,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-12-22 14:11:40
+-- Dump completed on 2022-12-23 13:32:17
