@@ -21,9 +21,6 @@ with open('data_files/access.json', 'r') as f:
     access_config = json.load(f)
     app.config['access_config'] = access_config
 
-with open('data_files/cache.json', 'r') as f:
-    cache_config = json.load(f)
-    app.config['cache_config'] = cache_config
 
 @app.route('/')
 def menu_choice():

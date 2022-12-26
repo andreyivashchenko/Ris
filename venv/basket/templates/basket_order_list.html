@@ -18,14 +18,24 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-md-8">
-            <h2>Все товары</h2>
+        <div class="col-md-6">
+            <h2>Услуги, доступные к подключению</h2>
             {% if items %}
             {% for item in items %}
-                {{ utils.render_item(item, show_form = True, show_amount = False) }}
+                {{ utils.render_item(item, show_form = True, show_delete = False) }}
             {% endfor %}
             {% else %}
                 <p>Нет доступных товаров</p>
+            {% endif %}
+        </div>
+        <div class="col-md-6">
+            <h2>Подключенные услуги</h2>
+            {% if items0 %}
+            {% for i in items0 %}
+                {{ utils.render_item(i, show_form = False, show_delete = True) }}
+            {% endfor %}
+            {% else %}
+                <p>Нет подключенных услуг</p>
             {% endif %}
         </div>
         <div class="col-md-4">
@@ -33,15 +43,13 @@
             <a href="{{url_for('bp_order.clear_basket')}}" style="color:green">Очистить корзину</a>
             {% if basket %}
             {% for key in basket %}
-                {{ utils.render_item(basket[key], show_form=False, show_amount=True) }}
+                {{ utils.render_item(basket[key], show_form=False, show_delete = False) }}
             {% endfor %}
             {% else %}
                 <p>Ваша корзина пуста</p>
             {% endif %}
         </div>
-
     </div>
-
 </div>
 
 </body>

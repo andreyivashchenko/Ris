@@ -3,28 +3,31 @@ from flask import Blueprint, render_template, request, current_app, session, red
 from db_context_manager import DBConnection
 from db_work import select_dict, insert
 from sql_provider import SQLProvider
-from cache.wrapper import fetch_from_cache
+
 
 blueprint_order = Blueprint('bp_order', __name__, template_folder='templates', static_folder='static')
 provider = SQLProvider(os.path.join(os.path.dirname(__file__), 'sql'))
 
 @blueprint_order.route('/', methods=['GET', 'POST'])
 def order_index():
+    user_id = session.get('user_id')
     db_config = current_app.config['dbconfig']
-    cache_config = current_app.config['cache_config']
-    cached_select = fetch_from_cache('all_items_cached', cache_config)(select_dict)  # явное задание декоратора
+    sql1 = provider.get('connected_services.sql', user_id = user_id)
+    items = select_dict(db_config, sql1)
+    sql0 = provider.get('unconnected_services.sql', user_id=user_id)
+    items0 = select_dict(db_config, sql0)
     if request.method == 'GET':
-        sql = provider.get('all_items.sql')
-        items = cached_select(db_config, sql)
         print('items = ', items)
         basket_items = session.get('basket', {})
-        return render_template('basket_order_list.html', items=items, basket=basket_items)
+        return render_template('basket_order_list.html', items=items, basket=basket_items, items0 = items0)
     else:
         id_ser = request.form['id_ser']
-        sql = provider.get('all_items.sql')
-        items = select_dict(db_config, sql)
-        add_to_basket(id_ser, items)
-
+        action = request.form['action']
+        if action == 'add':
+            print('action ', action)
+            add_to_basket(id_ser, items)
+        else:
+            delete_a_service(db_config,user_id, id_ser)
         return redirect(url_for('bp_order.order_index'))
 
 def add_to_basket(id_ser: str, items: dict):
@@ -43,6 +46,13 @@ def add_to_basket(id_ser: str, items: dict):
         session.permanent = True
     return True
 
+def delete_a_service(dbconfig:dict ,user_id:int, id_ser:int):
+    with DBConnection(dbconfig) as cursor:
+        if cursor is None:
+            raise ValueError('Курсор не создан')
+        sql = provider.get('delete_a_service.sql', user_id=user_id, id_ser=id_ser)
+        cursor.execute(sql)
+    return True
 @blueprint_order.route('/clear-basket')
 def clear_basket():
     if 'basket' in session:
@@ -72,7 +82,6 @@ def save_order_with_list(dbconfig: dict, user_id: int, current_basket: dict):
             _sql2 = provider.get('select_order_id.sql', user_id=user_id)
             cursor.execute(_sql2)
             order_id = cursor.fetchall()[0][0]
-            print('order_id=', order_id)
             if order_id:
                 for key in current_basket:
                     print(key, current_basket[key])

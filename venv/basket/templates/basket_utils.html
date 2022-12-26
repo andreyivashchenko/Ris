@@ -1,14 +1,11 @@
-{% macro render_item(item, show_form=False, show_amount=False) %}
+{% macro render_item(item, show_form=False, show_delete=False) %}
 <div style="border-style: solid, border-color: black; margin: 5px">
     <p>
         <span style="color: black">Название: </span>
         <span style="color: green">{{ item['name_ser']}} </span>
         <span style="color: black">Цена: </span>
         <span style="color: green">{{ item['price_ser']}} </span>
-        {%if show_amount %}
-        <span style="color: black">Количество: </span>
-        <span style="color: green">{{ item['amount']}} </span>
-        {% endif %}
+
 
     </p>
 
@@ -16,7 +13,15 @@
     <div>
         <form action="" method="post">
             <input type="hidden" name="id_ser" value="{{ item['id_ser'] }}">
-            <input type="submit" name="action" value="Добавить">
+            <button type="submit" name="action" value="add"> Добавить</button>
+        </form>
+    </div>
+    {% endif %}
+    {%if show_delete %}
+    <div>
+        <form action="" method="post">
+            <input type="hidden" name="id_ser" value="{{ item['id_ser'] }}">
+            <button type="submit" name="action" value="delete"> Удалить</button>
         </form>
     </div>
     {% endif %}
