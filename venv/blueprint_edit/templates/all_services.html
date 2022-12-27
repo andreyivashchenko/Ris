@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link type="text/css" href="{{ url_for('static', filename='edit/style.css') }}" rel="stylesheet" />
+</head>
+    <body>
+        <div class="wrapper">
+            <div class="container">
+            <h1 class="form_title">Список услуг</h1>
+                {% for service in service_list %}
+                    <form action="" method="post">
+                        <span class="title" >{{ service['name_ser'] }}</span>
+                        <button type="submit" name="action" value="edit_ser">Редактировать</button>
+                        <button type="submit" name="action" value="del_ser">Удалить</button>
+                        <input type="hidden" name="id_ser" value="{{ service['id_ser'] }}">
+                    </form>
+                {% endfor %}
+                <a href="{{ url_for('bp_edit.insert_ser') }}">Добавить новую услугу</a>
+                <a href="{{ url_for('bp_auth.int_user') }}">Вернуться в меню сотрудника </a>
+            </div>
+        </div>
+
+    </body>
+</html>

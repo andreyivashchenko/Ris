@@ -1,0 +1,1 @@
+insert services values ('$id_ser', '$name_ser', '$price_ser', current_date, null)

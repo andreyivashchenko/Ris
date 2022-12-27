@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link type="text/css" href="{{ url_for('static', filename='edit/style.css') }}" rel="stylesheet" />
+</head>
+<body>
+<div class="wrapper">
+    <div class="container">
+        <h1 class="form_title">{{ message }}</h1>
+        <a href="{{url_for('bp_edit.show_all_products')}}"> Вернуться к списку услуг</a>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,7 +1,7 @@
 import os
 from flask import Blueprint, render_template, request, current_app, session, redirect, url_for
 from db_context_manager import DBConnection
-from db_work import select_dict, insert
+from db_work import select_dict
 from sql_provider import SQLProvider
 
 
@@ -86,7 +86,7 @@ def save_order_with_list(dbconfig: dict, user_id: int, current_basket: dict):
                 for key in current_basket:
                     print(key, current_basket[key])
                     _sql3 = provider.get('insert_order_list.sql', order_id=order_id, prod_id=key)
-                    _sql4 = provider.get('insert_ser_status.sql',  date='2022-12-08', id_ser=key,user_id=user_id)
+                    _sql4 = provider.get('insert_ser_status.sql',  date='2022-12-08', id_ser=key, user_id=user_id)
                     cursor.execute(_sql3)
                     cursor.execute(_sql4)
                 return order_id

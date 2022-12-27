@@ -50,7 +50,7 @@ def call_proc(dbconfig: dict, proc_name: str, *args):
         res = cursor.callproc(proc_name, param_list)
     return res
 
-def insert(dbconfig: dict, _sql:str):
+def update(dbconfig: dict, _sql:str):
     with DBConnection(dbconfig) as cursor:
         if cursor is None:
             raise ValueError('Курсор не создан')

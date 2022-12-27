@@ -10,14 +10,12 @@ provider = SQLProvider(os.path.join(os.path.dirname(__file__), 'sql'))
 # reports = json.load(open('../data_files/reports.json'))
 
 report_list = [
-    {'rep_name':'report1 ', 'rep_id':'1'},
-    {'rep_name':'report2 ', 'rep_id':'2'}
+    {'rep_name':'report1 ', 'rep_id':'1'}
 ]
 
 
 report_url = {
-    '1': {'create_rep':'bp_report.create_rep1', 'view_rep':'bp_report.view_rep1'},
-    '2': {'create_rep':'bp_report.create_rep2', 'view_rep':'bp_report.view_rep'}
+    '1': {'create_rep':'bp_report.create_rep1', 'view_rep':'bp_report.view_rep1'}
 }
 
 
@@ -49,7 +47,7 @@ def create_rep1():
             _sql = provider.get('rep1.sql', year=year, month=month)
             report_result, schema = select(current_app.config['dbconfig'], _sql)
             if report_result:
-                return "Данный очтет уже создан"
+                return "Данный отчет уже создан"
             else:
                 res = call_proc(current_app.config['dbconfig'], 'report_1', year, month)
                 print('res=', res)

@@ -3,7 +3,7 @@ from blueprint_query.route import blueprint_query
 from blueprint_report.route import blueprint_report
 from blueprint_auth.route import blueprint_auth
 from basket.route import blueprint_order
-
+from blueprint_edit.route import blueprint_edit
 
 app = Flask(__name__)
 app.secret_key = 'SuperKey'
@@ -12,6 +12,7 @@ app.register_blueprint(blueprint_auth, url_prefix='/auth')
 app.register_blueprint(blueprint_query, url_prefix='/queries')
 app.register_blueprint(blueprint_report, url_prefix='/reports')
 app.register_blueprint(blueprint_order, url_prefix='/orders')
+app.register_blueprint(blueprint_edit, url_prefix='/edit')
 
 with open('data_files/dbconfig.json', 'r') as f:
     dbconfig = json.load(f)

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link type="text/css" href="{{ url_for('static', filename='edit/style.css') }}" rel="stylesheet" />
+</head>
+<body>
+<div class="wrapper">
+    <div class="container">
+        <h1 class="form_title">
+            Редактор услуг
+        </h1>
+        <form action="" method="post" class="form">
+            <label for="id_ser">Код услуги</label>
+            <input type="text" id="id_ser" name="id_ser" value="{{ service['id_ser'] }}" class="form_input">
+            <label for="ser_name">Название услуги</label>
+            <input type="text" id="name_ser" name="name_ser" value="{{ service['name_ser'] }}" class="form_input">
+            <label for="price_ser">Цена услуги</label>
+            <input type="text" id="price_ser" name="price_ser" value="{{ service['price_ser'] }}" class="form_input">
+            <input type="hidden" name="id_ser" value="{{ service['id_ser'] }}">
+            <button type="submit" name="action" value="update_ser" class="form_button">Отправить</button>
+            <a href="{{url_for('bp_edit.show_all_products')}}" > Отменить редактирование</a>
+        </form>
+
+    </div>
+</div>
+
+</body>
+</html>
